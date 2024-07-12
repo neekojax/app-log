@@ -1,0 +1,114 @@
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 700px; /* 增加搜索框的宽度 */
+    /*margin: 0 auto;*/
+    margin-top: 50px; /* 移动 FileUpload 组件向上 */
+}
+
+.file-input {
+    margin-bottom: 10px;
+    padding: 10px 40px; /* Google 搜索框的内边距 */
+    border: 1px solid #dfe1e5;
+    border-radius: 24px; /* Google 搜索框的圆角 */
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    color: #70757a; /* Google 搜索框提示文本的字体颜色 */
+    font-family: Arial, sans-serif; /* Google 搜索框的字体 */
+    background-color: white; /* 输入框的背景颜色改为白色 */
+    /*-webkit-font-smoothing: antialiased;*/
+}
+
+.file-input:focus {
+    border-color: #4d90fe; /* Google 搜索框的焦点边框颜色 */
+    outline: none;
+}
+
+.upload-button:hover {
+    background-color: #f1f3f4;
+}
+
+
+.upload-button-group button {
+    background-color: #007bff; /* 按钮背景颜色 */
+    color: white; /* 按钮文字颜色 */
+    border: none; /* 移除边框 */
+    padding: 10px 20px; /* 按钮内边距 */
+    margin-right: 10px; /* 按钮间距 */
+    border-radius: 5px; /* 按钮圆角 */
+    font-size: 16px; /* 按钮字体大小 */
+    font-weight: bold; /* 按钮字体粗细 */
+    cursor: pointer; /* 鼠标悬停样式 */
+    transition: background-color 0.3s ease; /* 过渡效果 */
+}
+
+.upload-button-group button:hover {
+    background-color: #0056b3; /* 悬停时按钮背景颜色 */
+}
+
+.upload-button-group {
+    margin-top: 25px;
+    display: flex;
+    gap: 35px; /* 按钮之间的间隔 */
+}
+
+.upload-button, .process-button {
+    width: 120px;
+    padding: 10px 20px;
+    border: 1px solid #dfe1e5;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    font-family: Arial, sans-serif; /* Google 按钮的字体 */
+}
+
+.upload-button:active, .process-button:active {
+    transform: scale(0.98); /* 点击时稍微缩小按钮 */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* 点击时添加轻微阴影 */
+}
+
+.progress-bar-container {
+    width: 100%;
+    background-color: #f3f4f6;
+    border-radius: 4px;
+    margin-top: 10px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.upload-status {
+    margin-top: 20px;
+    font-size: 25px;
+    color: red;
+    font-family: 'Arial', sans-serif; /* 设置字体族 */
+}
+
+.process-results {
+    color: black;  /* 设置字体颜色为黑色 */
+}
+
+.process-results h4 {
+    color: black;  /* 确保子标题也为黑色 */
+}
+
+.process-results ul {
+    color: black;  /* 确保列表也为黑色 */
+}
+
+.process-results li {
+    color: black;  /* 确保列表项也为黑色 */
+}
