@@ -11,6 +11,7 @@ const FileUpload = () => {
     const [showProgressBar, setShowProgressBar] = useState(false); // 添加状态变量来控制进度条的显示
     const [processResults, setProcessResults] = useState({}); // 添加状态变量来存储处理结果
     const [isUploading, setIsUploading] = useState(false); // 添加状态变量来指示文件是否正在上传
+    const [isProcessing, setIsProcessing] = useState(false);
 
     const navigate = useNavigate();
 
@@ -63,6 +64,8 @@ const FileUpload = () => {
     };
 
 
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
     const handleProcessFile = async () => {
         if (!selectedFile) {
             setUploadStatus('请先选择一个文件。');
@@ -74,7 +77,10 @@ const FileUpload = () => {
             return;
         }
 
+        setIsProcessing(true); // 开始处理时设置为 true
+
         try {
+            await sleep(1000);
             // 使用 Fetch API 接收数据
             fetch('http://localhost:8080/process', {
                 method: 'POST',
@@ -102,7 +108,9 @@ const FileUpload = () => {
         } catch (error) {
             console.error('处理文件出错:', error);
             setUploadStatus('处理文件时发生错误。');
-        }
+        } finally {
+        setIsProcessing(false); // 无论成功或失败都设置为 false
+    }
     };
 
 
@@ -119,6 +127,12 @@ const FileUpload = () => {
                 </div>
             )}
             <p className="upload-status">{uploadStatus}</p>
+            {isProcessing && (
+                <div className="loading-container">
+                    <div className="spinner"></div>
+                    <p>正在处理文件，请稍候...</p>
+                </div>
+            )}
         </div>
     );
 };
