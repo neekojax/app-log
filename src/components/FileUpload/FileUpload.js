@@ -10,6 +10,7 @@ const FileUpload = () => {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [showProgressBar, setShowProgressBar] = useState(false); // 添加状态变量来控制进度条的显示
     const [processResults, setProcessResults] = useState({}); // 添加状态变量来存储处理结果
+    const [isUploading, setIsUploading] = useState(false); // 添加状态变量来指示文件是否正在上传
 
     const navigate = useNavigate();
 
@@ -27,6 +28,7 @@ const FileUpload = () => {
             return;
         }
         setShowProgressBar(true); // 显示进度条
+        setIsUploading(true); // 设置文件正在上传的状态
 
         const formData = new FormData();
         formData.append('file', selectedFile);
@@ -48,11 +50,13 @@ const FileUpload = () => {
                 setUploadStatus('文件上传失败。');
             }
             setShowProgressBar(false); // 上传完成后隐藏进度条
+            setIsUploading(false); // 清除文件正在上传的状态
         };
 
         xhr.onerror = () => {
             setUploadStatus('上传文件时发生错误。');
             setShowProgressBar(false); // 上传完成后隐藏进度条
+            setIsUploading(false); // 清除文件正在上传的状态
         };
 
         xhr.send(formData);
@@ -62,6 +66,11 @@ const FileUpload = () => {
     const handleProcessFile = async () => {
         if (!selectedFile) {
             setUploadStatus('请先选择一个文件。');
+            return;
+        }
+
+        if (isUploading) {
+            alert('文件正在上传中，稍后再试。');
             return;
         }
 
@@ -102,7 +111,7 @@ const FileUpload = () => {
             <input type="file" onChange={handleFileChange} className="file-input"/>
             <div className="upload-button-group">
                 <button onClick={handleUpload} className="upload-button">Upload</button>
-                <button onClick={handleProcessFile} className="process-button">Process</button>
+                <button onClick={handleProcessFile} className="process-button" >Process</button>
             </div>
             {showProgressBar && (
                 <div className="progress-bar-container">
