@@ -25,7 +25,7 @@ const FileUpload = () => {
 
     const handleUpload = async () => {
         if (!selectedFile) {
-            setUploadStatus('Please select a file first.');
+            setUploadStatus('请先选择一个文件。');
             return;
         }
         setShowProgressBar(true); // 显示进度条
@@ -66,9 +66,9 @@ const FileUpload = () => {
 
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    const handleProcessFile = async () => {
+        const handleUpdateCache = async () => {
         if (!selectedFile) {
-            setUploadStatus('请先选择一个文件。');
+            //setUploadStatus('请先选择一个文件。');
             return;
         }
 
@@ -80,9 +80,9 @@ const FileUpload = () => {
         setIsProcessing(true); // 开始处理时设置为 true
 
         try {
-            await sleep(1000);
+            await sleep(500);
             // 使用 Fetch API 接收数据
-            fetch('http://localhost:8080/process', {
+            fetch('http://localhost:8080/update', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -91,14 +91,7 @@ const FileUpload = () => {
             })
                 .then(response => response.json())
                 .then(data => {
-                    // console.log(data); // 输出接收到的数据
                     setUploadStatus('文件处理成功。');
-                    setProcessResults(data);
-                    navigate('/log', { state: { switchLog: data.switchLog, powerLog: data.powerLog } });
-                    // 处理数据
-                    // for (const [key, values] of Object.entries(data)) {
-                    //     console.log(`Key: ${key}, Values: ${values.join(', ')}`);
-                    // }
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
@@ -109,17 +102,59 @@ const FileUpload = () => {
             console.error('处理文件出错:', error);
             setUploadStatus('处理文件时发生错误。');
         } finally {
-        setIsProcessing(false); // 无论成功或失败都设置为 false
-    }
+            setIsProcessing(false); // 无论成功或失败都设置为 false
+        }
     };
 
+    const handleFetchCache = async () => {
+
+        try {
+            await sleep(500);
+            // 使用 Fetch API 接收数据
+            fetch('http://localhost:8080/fetch', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    setProcessResults(data); // 假设 data 是一个对象，其中包含所有缓存结果
+                    navigate('/log', { state: { allResults: data } }); // 将所有结果传递到 /log 路由
+                    setUploadStatus('数据获取成功。');
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    setUploadStatus('数据获取失败。');
+                });
+
+        } catch (error) {
+            console.error('数据获取出错:', error);
+            setUploadStatus('获取数据时发生错误。');
+        }
+    };
+
+    const handleProcess = async () => {
+        console.log('Starting handleUpdateCache');
+        handleUpdateCache()
+            .then(() => {
+                console.log('Starting handleFetchCache');
+                return handleFetchCache();
+            })
+            .then(() => {
+                console.log('Completed handleFetchCache');
+            })
+            .catch((error) => {
+                console.error('Error occurred during handleProcess:', error);
+            });
+    };
 
     return (
         <div className="file-upload-container">
             <input type="file" onChange={handleFileChange} className="file-input"/>
             <div className="upload-button-group">
                 <button onClick={handleUpload} className="upload-button">Upload</button>
-                <button onClick={handleProcessFile} className="process-button" >Process</button>
+                <button onClick={handleProcess} className="process-button" >Process</button>
             </div>
             {showProgressBar && (
                 <div className="progress-bar-container">
