@@ -47,7 +47,8 @@ const Log = () => {
 
     const renderLogButtons = () => (
         Object.keys(allResults).map((key) => {
-            const displayText = key.length > 25 ? key.slice(-25) : key;
+            // const displayText = key.length > 25 ? key.slice(-25) : key;
+            const displayText = key.length > 25 ? key.slice(0, 23) + '...' : key;
             return (
                 <button
                     key={key}

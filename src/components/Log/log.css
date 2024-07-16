@@ -22,15 +22,6 @@ body {
     font-size: 18px; /* 调整标题字体大小 */
 }
 
-/*.process-results h4 {*/
-/*    !*margin-top: 0px;*!*/
-/*    margin-left: 10px;*/
-/*    color: #555;*/
-/*    border-bottom: 2px solid #eee;*/
-/*    padding-bottom: 5px;*/
-/*    font-size: 20px; !* 调整小标题字体大小 *!*/
-/*    background-color: #eceef4;*/
-/*}*/
 .process-results h4 {
     width: 200px;
     margin-left: 10px; /* 调整左边距 */
@@ -110,18 +101,11 @@ body {
 }
 
 .button-group button {
-    /*width: 130px;*/
     background-color: #f6f9ff;
-    /*background-color: #007bff; !* 按钮背景颜色 *!*/
-    /*color: white; !* 按钮文字颜色 *!*/
-    /*border: none; !* 移除边框 *!*/
     border: none; /* 移除边框 */
-    /*padding: 10px 1px; !* 按钮内边距 *!*/
     border-radius: 8px; /* 按钮圆角 */
     font-size: 15px; /* 按钮字体大小 */
-    /*font-weight: bold; !* 按钮字体粗细 *!*/
     cursor: pointer; /* 鼠标悬停样式 */
-    /*transition: background-color 0.3s ease; !* 过渡效果 *!*/
     color: #9a98ba;
 }
 
@@ -131,7 +115,7 @@ body {
     border: none; /* 移除边框 */
     padding: 10px 20px; /* 按钮内边距 */
     border-radius: 5px; /* 按钮圆角 */
-    font-size: 15px; /* 按钮字体大小 */
+    font-size: 14px; /* 按钮字体大小 */
     font-weight: bold; /* 按钮字体粗细 */
     cursor: pointer; /* 鼠标悬停样式 */
     transition: background-color 0.3s ease; /* 过渡效果 */
