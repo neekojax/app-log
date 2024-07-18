@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+
+import Cookies from 'js-cookie';
 
 import './FileUpload.css';
 
@@ -24,6 +26,14 @@ const FileUpload = () => {
     };
 
     const handleUpload = async () => {
+
+//         function deleteCookie(name) {
+//             document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+//         }
+//
+// // 清除名为 "token" 的 cookie
+//         deleteCookie('token');
+
         if (!selectedFile) {
             setUploadStatus('请先选择一个文件。');
             return;
@@ -36,6 +46,14 @@ const FileUpload = () => {
 
         const xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://localhost:8080/upload', true);
+
+        // 获取 token
+        const token = Cookies.get('token');
+
+        // 设置请求头中的 Authorization 字段
+        if (token) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+        }
 
         xhr.upload.onprogress = (event) => {
             if (event.lengthComputable) {
@@ -81,11 +99,14 @@ const FileUpload = () => {
 
         try {
             await sleep(500);
+            const token = Cookies.get('token'); // 从cookie获取token
             // 使用 Fetch API 接收数据
             fetch('http://localhost:8080/update', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Authorization': `Bearer ${token}`, // 设置Authorization头
+                    'Content-Type': 'application/json',
+                    credentials: 'include'
                 },
                 body: JSON.stringify({ fileName: selectedFile.name })
             })
@@ -110,11 +131,14 @@ const FileUpload = () => {
 
         try {
             await sleep(500);
+            const token = Cookies.get('token'); // 从cookie获取token
             // 使用 Fetch API 接收数据
             fetch('http://localhost:8080/fetch', {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Authorization': `Bearer ${token}`, // 设置Authorization头
+                    'Content-Type': 'application/json',
+                    credentials: 'include'
                 },
             })
                 .then(response => response.json())
