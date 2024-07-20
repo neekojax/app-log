@@ -1,0 +1,58 @@
+/* src/components/NavBar/NavBar.css */
+
+/* src/components/NavBar/navbar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* 使内容在容器内均匀分布 */
+    align-items: center; /* 垂直居中对齐 */
+    background-color:  #f6f9ff;
+    padding: 10px;
+    width: 100vw;
+    margin-top: 30px;
+    /*left: 0; !* 使其在左对齐 **/
+}
+
+.button-group {
+    display: flex;
+    justify-content: center; /* 子元素左对齐 */
+    margin: 0 auto; /* 使其在父容器中水平居中 */
+}
+
+.button-group button {
+    background-color: #f6f9ff;
+    border: none; /* 移除边框 */
+    border-radius: 8px; /* 按钮圆角 */
+    font-size: 15px; /* 按钮字体大小 */
+    cursor: pointer; /* 鼠标悬停样式 */
+    color: #9a98ba;
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+
+}
+
+.button-group.hidden {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+
+.button-group button.selected {
+    background-color: #ebf2ff;
+    /*color: #8fc0ff;*/
+    color: #2d8bf9;
+}
+
+.button-group button:hover {
+    color:#2d8bf9;
+    /*background-color: #2d8bf9; !* 悬停时按钮背景颜色 *!*/
+}
+
+
+.logo {
+    height: 40px; /* 缩小 logo 图片的高度 */
+    width: auto; /* 保持图片宽高比 */
+    position: relative; /* 设置相对定位 */
+    margin-right: 40px;
+}

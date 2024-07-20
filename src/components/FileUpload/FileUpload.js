@@ -27,13 +27,6 @@ const FileUpload = () => {
 
     const handleUpload = async () => {
 
-//         function deleteCookie(name) {
-//             document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-//         }
-//
-// // 清除名为 "token" 的 cookie
-//         deleteCookie('token');
-
         if (!selectedFile) {
             setUploadStatus('请先选择一个文件。');
             return;

@@ -1,20 +1,17 @@
 .App-header {
-    /*min-height: 50vh;*/
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
+    align-items: center; /* 使内容在水平方向上居中 */
     color: white;
     min-width: 500px;
     height: 100px;
-    margin-top: 200px;
+    margin-top: 100px;
 }
 
 /* 其他样式保持不变 */
 
 .App-logo {
     height: 100px; /* 缩小 logo 图片的高度 */
-    width: auto; /* 保持图片宽高比 */
-    /*margin-top: -200px;*/
-    /*margin-bottom: 20px; !* 保证 logo 图片和 FileUpload 组件之间有一些间隔 *!*/
+    width: 500px; /* 保持图片宽高比 */
+    margin: 0 auto; /* 使图片在水平方向上居中 */
 }

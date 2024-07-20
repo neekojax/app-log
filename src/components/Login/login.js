@@ -11,13 +11,6 @@ const Login = ({onLogin}) => {
 
     const navigate = useNavigate();
 
-    // 获取指定名称的cookie值
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-
     const handleLogin = async (e) => {
         e.preventDefault();
         if (!username || !password) {
@@ -38,6 +31,7 @@ const Login = ({onLogin}) => {
                 const data = await response.json();
                 // const token = response.headers.get('Set-Cookie').split(';')[0].split('=')[1];
                 Cookies.set('token', data.token, { expires: 1 }); // 保存token到cookie，设置过期时间为1天
+                Cookies.set('username', username, { expires: 1 }); // 保存用户名到cookie，设置过期时间为1天
 
                 onLogin(); // 调用父组件传递的 onLogin 方法
                 navigate('/upload'); // 登录成功后跳转到文件上传页面

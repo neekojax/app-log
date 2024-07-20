@@ -2,8 +2,9 @@
 import React from 'react';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import './logout.css'
 
-const LogoutButton = ({ onLogout }) => {
+const LogoutButton = ({ onLogout, username }) => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -13,9 +14,10 @@ const LogoutButton = ({ onLogout }) => {
     };
 
     return (
-        <button onClick={handleLogout}>
-            退出
-        </button>
+        <div className="logout-container">
+            <span className="username-span">Hi, {username}</span> {/* 显示用户名 */}
+            <button onClick={onLogout} className="logout-button">登出</button>
+        </div>
     );
 };
 

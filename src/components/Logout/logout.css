@@ -1,0 +1,33 @@
+.logout-container {
+    background-color: #f6f9ff;
+    /*border: none; !* 移除边框 *!*/
+    /*border-radius: 8px; !* 按钮圆角 *!*/
+    font-size: 15px; /* 按钮字体大小 */
+    cursor: pointer; /* 鼠标悬停样式 */
+    /*color: #2d8bf9;*/
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+    margin-right: 30px;
+    margin-top: -5px;
+}
+
+.logout-button {
+    background-color: #f6f9ff;
+    border: none; /* 移除边框 */
+    border-radius: 8px; /* 按钮圆角 */
+    font-size: 15px; /* 按钮字体大小 */
+    cursor: pointer; /* 鼠标悬停样式 */
+    color: #2d8bf9;
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+}
+
+.logout-button:hover {
+    background-color: darkred; /* 鼠标悬停时的背景颜色 */
+}
+
+.username-span {
+    color: #9a98ba;
+    margin-left: 30px;
+    font-weight: bold; /* 设置为粗体 */
+}
