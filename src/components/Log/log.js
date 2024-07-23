@@ -7,18 +7,21 @@ const Log = ({ selectedLogType }) => {
     const location = useLocation();
 
     // 接收所有结果
-    const { allResults } = location.state || { allResults: {} };
-    const [selectedKey, setSelectedKey] = useState(null);
+    const storedResults = localStorage.getItem('allResults');
+    const allResults = location.state?.allResults || (storedResults ? JSON.parse(storedResults) : {});
+    const [selectedKey, setSelectedKey] = useState(localStorage.getItem('selectedKey') || null);
     const [selectedResult, setSelectedResult] = useState(null);
 
     // 设置第一个 key 为默认选中值，并设置默认结果为 switchLog
     useEffect(() => {
         const keys = Object.keys(allResults);
         if (keys.length > 0) {
-            const defaultKey = keys[0];
-            setSelectedKey(defaultKey);
-            setSelectedResult(allResults[defaultKey][selectedLogType] || null);
+            const keyToSelect = selectedKey && keys.includes(selectedKey) ? selectedKey : keys[0];
+            setSelectedKey(keyToSelect);
+            setSelectedResult(allResults[keyToSelect][selectedLogType] || null);
         }
+        // 将所有结果保存到本地存储
+        localStorage.setItem('allResults', JSON.stringify(allResults));
     }, [allResults, selectedLogType]);
 
     // 当点击按钮时，显示对应的结果
@@ -30,6 +33,7 @@ const Log = ({ selectedLogType }) => {
         } else {
             setSelectedResult(null); // 如果没有找到相应的日志类型，则清空结果
         }
+        localStorage.setItem('selectedKey', key); // 存储选择的key到本地存储
     };
 
     const renderLogButtons = () => (
